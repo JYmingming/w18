@@ -177,12 +177,13 @@
 
     function addCart(menu) {
 
-        // const result = orders.filter(oi => oi.name === menu.name)
-        // if (!result){
-        //     orders.push(result)
-        // }else{
+         const result = orders.filter(oi => oi.name === menu.name)
+         if (0<result.length){
+             result[0].qty++
+         }else{
+             orders.push({...menu, qty:1})
+         }
 
-        orders.push({...menu, qty:1})
         // }
         console.log(orders)
 
@@ -193,7 +194,7 @@
         for (let i = 0; i < orders.length; i++) {
 
             str += `<li>${orders[i].name} ${orders[i].qty}개============${orders[i].price}</li>`
-            sum+= orders[i].price
+            sum+= orders[i].price*orders[i].qty
         }
         str += `<h1>${sum} </h1>`
         document.querySelector(".orderDiv").innerHTML = str
